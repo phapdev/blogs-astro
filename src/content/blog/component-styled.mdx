@@ -1,0 +1,137 @@
+---
+title: 'Styled Components'
+description: 'Styled Components là một thư viện CSS-in-JS phổ biến cho React. Nó cho phép bạn viết CSS thực tế bên trong các component JavaScript của mình.'
+pubDate: 'Aug 29 2022'
+heroImage: '/blog-placeholder-2.jpg'
+---
+Styled Components là một thư viện CSS-in-JS phổ biến cho React. Nó cho phép bạn viết CSS thực tế bên trong các component JavaScript của mình.
+
+Một số ưu điểm chính:
+
+1. Tạo component có style tự chứa
+2. Tự động tạo tên class duy nhất để tránh xung đột
+3. Hỗ trợ CSS động dựa trên props
+4. Dễ dàng quản lý và bảo trì styles
+
+```xml
+import styled from 'styled-components';
+
+const Button = styled.button`
+  background-color: blue;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+`;
+
+function App() {
+  return <Button>Click me</Button>;
+}
+```
+
+Hãy xem xét một số tính năng nâng cao của Styled Components:
+
+### 1. Sử dụng props để tạo CSS động:
+
+```jsx
+const Button = styled.button`
+  background-color: ${props => props.primary ? 'blue' : 'gray'};
+  color: white;
+  padding: 10px 20px;
+`;
+
+function App() {
+  return (
+    <>
+      <Button>Normal Button</Button>
+      <Button primary>Primary Button</Button>
+    </>
+  );
+}
+```
+
+### Kế thừa và mở rộng styles:
+
+```jsx
+const BaseButton = styled.button`
+  padding: 10px 20px;
+  border: none;
+`;
+
+const PrimaryButton = styled(BaseButton)`
+  background-color: blue;
+  color: white;
+`;
+```
+
+### Sử dụng với các component tùy chỉnh:
+
+```jsx
+const StyledLink = styled(Link)`
+  color: red;
+  text-decoration: none;
+`;
+```
+
+### Tạo themes:
+
+```jsx
+import { ThemeProvider } from 'styled-components';
+
+const theme = {
+  colors: {
+    primary: 'blue',
+    secondary: 'green'
+  }
+};
+
+const ThemedButton = styled.button`
+  background-color: ${props => props.theme.colors.primary};
+`;
+
+function App() {
+  return (
+    <ThemeProvider theme={theme}>
+      <ThemedButton>Themed Button</ThemedButton>
+    </ThemeProvider>
+  );
+}
+```
+
+### CSS toàn cục:
+
+```jsx
+import { createGlobalStyle } from 'styled-components';
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+`;
+
+function App() {
+  return (
+    <>
+      <GlobalStyle />
+      {/* rest of your app */}
+    </>
+  );
+}
+```
+
+### Animations:
+
+```jsx
+import { keyframes } from 'styled-components';
+
+const rotate = keyframes`
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+`;
+
+const RotatingDiv = styled.div`
+  animation: ${rotate} 2s linear infinite;
+`;
+```
